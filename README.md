@@ -10,6 +10,6 @@ First run `javac java/*.java`. Then run `python3 Chat\ App.py`. The app will the
 After either setting up your own server or learning the IP of another, you can connect the client. The Python script will ask you what you want your username to be and what IP to find the sever at. After giving it that, you will be ready to chat!
 
 #### If you do not have Python3:
-First complie all the java code:
+First compile all the java code:
 `javac java/*.java`
-Start a server by typing `java -jar Server.jar`. Then to run the client make sure you are in the `java` folder and tpye `java SimpleChatClient <IP addres of server> <username>`. 
+Start a server by typing `java -jar Server.jar`. Then to run the client make sure you are in the `java` folder and tpye `java SimpleChatClient <IP address of server> <username>`. 
