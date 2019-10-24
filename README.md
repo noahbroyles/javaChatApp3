@@ -13,3 +13,6 @@ After either setting up your own server or learning the IP of another, you can c
 First compile all the java code:
 `javac java/*.java`
 Start a server by typing `java -jar Server.jar`. Then to run the client make sure you are in the `java` folder and tpye `java SimpleChatClient <IP address of server> <username>`. 
+
+
+Pardon my ugly .DS_Stores. They do absolutly *NOTHING*.
