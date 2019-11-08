@@ -1,7 +1,9 @@
-import os, sys, time, getpass
+import os, sys, time, getpass, RUNFIRST
 print()
 
-# isVaild(ip) is not used in this program
+windys = RUNFIRST.Validate.isWindows()
+
+# isVaild(ip) is not used in this program, but is still USEFUL
 def isValidIp(ip):
     i = 0
     for char in ip:
@@ -27,7 +29,10 @@ try:
     print()
     if server[0] == '1':
         print('Okay. You are the host. To see what people are sending, run: \'cd classes; java SimpleChatClient 127.0.0.1 username\'')
-        os.system("cd classes/;java VerySimpleChatServer")
+        if windys:
+            os.system("cd classes/ && java VerySimpleChatServer")
+        else:
+            os.system("cd classes/;java VerySimpleChatServer")
     elif server[0] == '2':
         ip = getIp()
         userName = input('What do you want to be you user name? Spaces are not allowed: ')
@@ -37,6 +42,9 @@ try:
             print('Hey man, just so you know, your username can\'t have spaces in it. So don\'t freak out when it isn\'t the same as you said.')
         print()
         print('Connecting to the chat server @',ip,'using', userName,'as the User Name. Please Wait...')
-        os.system("cd classes/;java SimpleChatClient " + ip + " "+ userName)
+        if windys:
+            os.system("cd classes/ && java SimpleChatClient " + ip + " "+ userName)
+        else:
+            os.system("cd classes/;java SimpleChatClient " + ip + " "+ userName)
 except KeyboardInterrupt:
     sys.exit()
