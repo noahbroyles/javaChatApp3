@@ -13,7 +13,7 @@ After either setting up your own server or learning the IP of another, you can c
 #### If you do not have Python3:
 First run this fat juicy command:
 `cd source; javac -d ../classes/. *.java; cd ../classes; jar -cvmf manifest.txt SimpleChatClient.jar *`
-This will recomile everything and get your version of java ready for binness.
+This will recompile everything and get your version of java ready for binness.
 Start a server by typing `cd classes` and then `java -jar Server.jar`. Then to run the client open a new terminal / command prompt window, make sure you are in the `classes` folder, and type `java SimpleChatClient <IP address of server> <username>`. 
 If you get errors trying to run the Server jar, that is because you have a different version of Java than my *GOOD* one. If that happens, run the server as follows:
 `java VerySimpleChatServer`
