@@ -1,0 +1,2 @@
+Main-Class: SimpleChatClient
+Class-Path: alert.wav

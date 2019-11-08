@@ -36,7 +36,7 @@ public class VerySimpleChatServer {
     public void go() {
         clientOutputStreams = new ArrayList();
         try {
-                ServerSocket serverSock = new ServerSocket(5000);
+                ServerSocket serverSock = new ServerSocket(443);
                 while (true) {
                         Socket clientSocket = serverSock.accept();
                         PrintWriter writer = new PrintWriter(clientSocket.getOutputStream());

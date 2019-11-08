@@ -23,16 +23,30 @@ public class SimpleChatClient {
 
     public static void main(String[] args) {
         SimpleChatClient client = new SimpleChatClient();
-        String ip = args[0];
-        client.userName = args[1];
-        client.go(ip);
+        try {
+            String ip = args[0];
+            client.userName = args[1];
+            client.go(ip);
+        } catch(Exception ex) {
+            Scanner kbdReader = new Scanner(System.in);
+            System.out.println();
+            System.out.println("Enter the IP of the host Server: ");
+            String ip = kbdReader.next();
+            System.out.println();
+            System.out.println("Enter your username, no spaces allowed: ");
+            client.userName = kbdReader.next();
+            System.out.println();
+            kbdReader.close();
+            client.go(ip);
+        }
         
     }
 
     
     public void playSoundAlert() {
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("alert.wav").getAbsoluteFile());
+
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(this.getClass().getResourceAsStream("alert.wav"));
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
@@ -42,7 +56,6 @@ public class SimpleChatClient {
         }
     }
     
-
 
 
     public void go(String ip) {
@@ -72,14 +85,25 @@ public class SimpleChatClient {
         readerThread.start();
 
         frame.getContentPane().add(BorderLayout.CENTER, mainpanel);
-        frame.setSize(750,660);
+        frame.setSize(750,680);
         frame.setVisible(true);
     } // close the go methodical method
 
     public void sendMessage() {
+        String textMessage = outgoing.getText().trim();
         try {
-            if (outgoing.getText().length() != 0) {
-                writer.println(" " + userName + ":     " + outgoing.getText());
+            Boolean good = true;
+            int counter = 0;
+            for (int i = textMessage.length() - 1; i >= 0; i--) {
+                if (textMessage.charAt(i) == ' ') {
+                    counter ++;
+                }
+            }
+            if (counter == textMessage.length()) {
+                good = false;
+            }
+            if (textMessage.length() != 0 && good) {
+                writer.println(" " + userName + ":     " + textMessage);
                 writer.flush();
             } 
         } catch(Exception ex) {
@@ -92,7 +116,7 @@ public class SimpleChatClient {
     private void setUpNetworking(String ip) {
         
         try {
-            sock = new Socket(ip, 5000);
+            sock = new Socket(ip, 443);
             InputStreamReader streamReader = new InputStreamReader(sock.getInputStream());
             reader = new BufferedReader(streamReader);
             writer = new PrintWriter(sock.getOutputStream());
@@ -104,6 +128,7 @@ public class SimpleChatClient {
             System.exit(1);
         }
     } // end setUpNetworking
+
 
     public class SendButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent ev) {
