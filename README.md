@@ -11,10 +11,10 @@ Next run `python3 Chat\ App.py`. The app will then guide you through either runn
 After either setting up your own server or learning the IP of another, you can connect the client. The Python script will ask you what you want your username to be and what IP to find the sever at. After giving it that, you will be ready to chat!
 
 #### If you do not have Python3:
-First run this fat juicy command (Linux based):
+First run this fat juicy command (Linux or Mac):
 `cd source; javac -d ../classes/. *.java; cd ../classes; jar -cvmf manifest.txt SimpleChatClient.jar *`
 
-(Windows(junk) based):
+(Windows (junk)):
 `cd source && javac -d ../classes/. *.java && cd ../classes && jar -cvmf manifest.txt SimpleChatClient.jar *`
 
 This will recomile everything and get your version of java ready for binness.
