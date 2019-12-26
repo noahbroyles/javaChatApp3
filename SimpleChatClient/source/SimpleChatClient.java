@@ -5,24 +5,31 @@ import java.net.*;
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
+import java.awt.Toolkit;
 import java.awt.event.*;
 import javax.sound.midi.*;
 import javax.sound.sampled.Clip; 
+import java.awt.datatransfer.Clipboard;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.AudioInputStream;
+import java.awt.datatransfer.StringSelection;
 import javax.sound.sampled.LineUnavailableException; 
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 
+
 public class SimpleChatClient {
     Boolean soundAlerts = true;
+    JFrame emojiFrame;
     JTextArea incoming;
     JTextField outgoing;
     JButton soundToggle;
+    JButton emojiToggle;
     BufferedReader reader;
     PrintWriter writer;
     Socket sock;
     String userName;
+    ArrayList<String> emojis = new ArrayList<String>(Arrays.asList("﴾͡๏̯͡๏﴿", "♥‿♥", "(ᵔᴥᵔ)", "¯\\_(ツ)_/¯", "⌐╦╦═─", "༼ つ ◕_◕ ༽つ"));
 
     public static void main(String[] args) {
         SimpleChatClient client = new SimpleChatClient();
@@ -37,7 +44,21 @@ public class SimpleChatClient {
             String ip = kbdReader.next();
             System.out.println();
             System.out.println("Enter your username, no spaces allowed: ");
-            client.userName = kbdReader.next();
+            Boolean you = true;
+            Boolean spaces = true;
+            while (spaces || you) {
+                client.userName = kbdReader.next();
+                if (!client.userName.toLowerCase().equals("you")) {
+                    you = false;
+                } else {
+                    System.out.println("Sorry Brotha, your username can't be \"You\". Try again: ");
+                }
+                if (!client.userName.contains(" ")) {
+                    spaces = false;
+                } else {
+                    System.out.println("Sorry Brotha, your username can't have spaces in it. Try again: ");
+                }
+            }
             System.out.println();
             kbdReader.close();
             client.go(ip);
@@ -61,7 +82,6 @@ public class SimpleChatClient {
 
     public void playSendAlert() {
         try {
-
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(this.getClass().getResourceAsStream("sent.wav"));
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
@@ -72,10 +92,16 @@ public class SimpleChatClient {
         }
     }
     
-
+    public void copyToClipboard (String text) {
+        StringSelection stringSelection = new StringSelection(text);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(stringSelection, null);
+    }
 
     public void go(String ip) {
         JFrame frame = new JFrame("Freaky Chat App | " + userName + " chattin'");
+        emojiFrame = new JFrame("Text Emojis Baby!");
+        emojiFrame.setResizable(true);
         frame.setResizable(false);
 
         JPanel mainpanel = new JPanel();
@@ -86,6 +112,15 @@ public class SimpleChatClient {
         incoming.setEditable(false);
         Font inFont = new Font("sans-serif", 20, 15);
         incoming.setFont(inFont);
+        
+        JTextArea emojiTextArea = new JTextArea(30, 20);
+        emojiTextArea.setEditable(false);
+        emojiTextArea.setLineWrap(false);
+        emojiTextArea.setFont(inFont);
+        // Time to populate Emojis from the ArrayList to the TextArea
+        for (String emoji : emojis) {
+            emojiTextArea.append(emoji + "      ");
+        }
 
         JScrollPane qscroller = new JScrollPane(incoming);
         new SmartScroller(qscroller);
@@ -95,25 +130,34 @@ public class SimpleChatClient {
         outgoing = new JTextField(45);
         outgoing.addKeyListener(new SimpleChatClient.EnterKeyListener());
 
+
         JButton sendButton = new JButton("Send");
+        sendButton.setForeground(Color.BLUE);
+        emojiToggle = new JButton("Show Emojis");
         soundToggle = new JButton("Mute Sound");
         soundToggle.setForeground(Color.RED);
         soundToggle.addActionListener(new SoundButtonListener());
         sendButton.addActionListener(new SendButtonListener());
+        emojiToggle.addActionListener(new EmojiButtonClicker());
 
         mainpanel.setBackground(Color.darkGray);
         mainpanel.add(qscroller);
         mainpanel.add(outgoing);
         mainpanel.add(sendButton);
+        mainpanel.add(emojiToggle);
         mainpanel.add(soundToggle);
+
         setUpNetworking(ip);
 
         Thread readerThread = new Thread(new IncomingReader());
         readerThread.start();
 
         frame.getContentPane().add(BorderLayout.CENTER, mainpanel);
+        emojiFrame.getContentPane().add(emojiTextArea);
         frame.setSize(750,680);
+        emojiFrame.setSize(300, 400);
         frame.setVisible(true);
+        outgoing.requestFocus();
 
     } // close the go methodical method
 
@@ -123,7 +167,7 @@ public class SimpleChatClient {
             if (textMessage.length() != 0) {
                 writer.println(" " + userName + ":     " + textMessage);
                 writer.flush();
-                incoming.append(" " + textMessage + "\n\n");
+                incoming.append(" You: " + textMessage + "\n\n");
                 playSendAlert();
             } 
         } catch(Exception ex) {
@@ -166,6 +210,18 @@ public class SimpleChatClient {
                 soundToggle.setText("Mute Sound");
             }
             
+        }
+    }
+
+    public class EmojiButtonClicker implements ActionListener {
+        public void actionPerformed(ActionEvent ev) {
+            if (emojiToggle.getText() == "Show Emojis") {
+                emojiToggle.setText("Hide Emojis");
+                emojiFrame.setVisible(true);
+            } else {
+                emojiToggle.setText("Show Emojis");
+                emojiFrame.setVisible(false);
+            }
         }
     }
 

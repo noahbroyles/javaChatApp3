@@ -23,8 +23,20 @@ def getIp():
         ip = "127.0.0.1"
     return ip
 
+def getUsername():
+    userName = input('What do you want to be your user name? Spaces are not allowed: ')
+    if userName == '':
+        userName = getpass.getuser()
+    elif userName.lower() == "you":
+        print('Hey man, just so you know, your username can\'t be "You". Sorry. ')
+        userName = getUsername()
+    if ' ' in userName:
+        print('Hey man, just so you know, your username can\'t have spaces in it. So don\'t freak out when it isn\'t the same as you said.')
+    return userName
+
 
 try:
+    os.system("clear")
     server = input("Would you like to:\n[1] Host the Chat Server on your computer\n[2] or connect to the Chat Server server on a different computer? ")
     print()
     if server[0] == '1':
@@ -35,11 +47,7 @@ try:
             os.system("cd classes/;java VerySimpleChatServer")
     elif server[0] == '2':
         ip = getIp()
-        userName = input('What do you want to be your user name? Spaces are not allowed: ')
-        if userName == '':
-            userName = getpass.getuser()
-        if ' ' in userName:
-            print('Hey man, just so you know, your username can\'t have spaces in it. So don\'t freak out when it isn\'t the same as you said.')
+        userName = getUsername()
         print()
         print('Connecting to the chat server @',ip,'using', userName,'as the User Name. Please Wait...')
         if windys:
@@ -47,4 +55,4 @@ try:
         else:
             os.system("cd classes/;java SimpleChatClient " + ip + " "+ userName)
 except KeyboardInterrupt:
-    sys.exit()
+    sys.exit("\n")
