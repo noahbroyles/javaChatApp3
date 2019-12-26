@@ -35,7 +35,7 @@ try:
             os.system("cd classes/;java VerySimpleChatServer")
     elif server[0] == '2':
         ip = getIp()
-        userName = input('What do you want to be you user name? Spaces are not allowed: ')
+        userName = input('What do you want to be your user name? Spaces are not allowed: ')
         if userName == '':
             userName = getpass.getuser()
         if ' ' in userName:
