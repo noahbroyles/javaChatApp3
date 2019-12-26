@@ -24,4 +24,4 @@ If you get errors trying to run the Server jar, that is because you have a diffe
 
 Pardon my ugly .DS_Stores. They do absolutly *NOTHING*.
 
-The cool thing is that I fixed up this app so that it uses port 443. Now it will not be blocked by firewalls! Yes!
+The cool thing is that you can set the port to 443 so that it will not blocked by firewalls! Yesssss!
