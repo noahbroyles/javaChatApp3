@@ -8,7 +8,9 @@ import javax.swing.*;
 import java.awt.Toolkit;
 import java.awt.event.*;
 import javax.sound.midi.*;
+import javax.crypto.Cipher;
 import javax.sound.sampled.Clip; 
+import javax.crypto.spec.SecretKeySpec;
 import java.awt.datatransfer.Clipboard;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.AudioInputStream;
@@ -29,10 +31,12 @@ public class SimpleChatClient {
     PrintWriter writer;
     Socket sock;
     String userName;
-    ArrayList<String> emojis = new ArrayList<String>(Arrays.asList("﴾͡๏̯͡๏﴿", "♥‿♥", "(ᵔᴥᵔ)", "¯\\_(ツ)_/¯", "⌐╦╦═─", "༼ つ ◕_◕ ༽つ"));
+    ArrayList<String> emojis = new ArrayList<String>(Arrays.asList("(~_^)", "﴾͡๏̯͡๏﴿", "◔ ⌣ ◔", "♥‿♥","(˃̣̣̥ w ˂̣̣̥)", "(ᵔᴥᵔ)", "¯\\_(ツ)_/¯","(✖╭╮✖)", "⌐╦╦═─", "༼ つ ◕_◕ ༽つ", "˙ ͜ʟ˙", "¬_¬", "[̲̅$̲̅(̲̅5̲̅)̲̅$̲̅]", "ू(･ิ ॄ･ิू๑)", "( ︶︿︶)_╭∩╮", "✄ it"));
 
     public static void main(String[] args) {
+
         SimpleChatClient client = new SimpleChatClient();
+
         try {
             String ip = args[0];
             client.userName = args[1];
@@ -63,10 +67,8 @@ public class SimpleChatClient {
             kbdReader.close();
             client.go(ip);
         }
-        
     }
 
-    
     public void playSoundAlert() {
         try {
 
@@ -100,7 +102,7 @@ public class SimpleChatClient {
 
     public void go(String ip) {
         JFrame frame = new JFrame("Freaky Chat App | " + userName + " chattin'");
-        emojiFrame = new JFrame("Text Emojis Baby!");
+        emojiFrame = new JFrame("Copy and Paste Emojis!");
         emojiFrame.setResizable(true);
         frame.setResizable(false);
 
@@ -113,13 +115,20 @@ public class SimpleChatClient {
         Font inFont = new Font("sans-serif", 20, 15);
         incoming.setFont(inFont);
         
-        JTextArea emojiTextArea = new JTextArea(30, 20);
+        JTextArea emojiTextArea = new JTextArea(20, 30);
         emojiTextArea.setEditable(false);
         emojiTextArea.setLineWrap(false);
         emojiTextArea.setFont(inFont);
+        emojiTextArea.setBackground(Color.ORANGE);
         // Time to populate Emojis from the ArrayList to the TextArea
+        int increment = 0;
         for (String emoji : emojis) {
-            emojiTextArea.append(emoji + "      ");
+            emojiTextArea.append(" " + emoji + "      "); 
+            increment += 1;
+            if (increment == 4) {
+                increment = 0;
+                emojiTextArea.append("\n\n ");
+            }
         }
 
         JScrollPane qscroller = new JScrollPane(incoming);
@@ -155,7 +164,7 @@ public class SimpleChatClient {
         frame.getContentPane().add(BorderLayout.CENTER, mainpanel);
         emojiFrame.getContentPane().add(emojiTextArea);
         frame.setSize(750,680);
-        emojiFrame.setSize(300, 400);
+        emojiFrame.setSize(380, 270);
         frame.setVisible(true);
         outgoing.requestFocus();
 
