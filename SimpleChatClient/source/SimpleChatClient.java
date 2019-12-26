@@ -7,16 +7,11 @@ import java.util.*;
 import javax.swing.*;
 import java.awt.Toolkit;
 import java.awt.event.*;
-import javax.sound.midi.*;
-import javax.crypto.Cipher;
 import javax.sound.sampled.Clip; 
-import javax.crypto.spec.SecretKeySpec;
 import java.awt.datatransfer.Clipboard;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.AudioInputStream;
 import java.awt.datatransfer.StringSelection;
-import javax.sound.sampled.LineUnavailableException; 
-import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 
