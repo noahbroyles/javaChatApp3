@@ -22,6 +22,6 @@ Start a server by typing `cd classes` and then `java -jar Server.jar`. Then to r
 If you get errors trying to run the Server jar, that is because you have a different version of Java than my *GOOD* one. If that happens, run the server as follows:
 `java VerySimpleChatServer`
 
-Pardon my ugly .DS_Stores. They do absolutly *NOTHING*.
+Pardon my ugly .DS_Stores. (_If you see any_) They do absolutly *NOTHING*.
 
 The cool thing is that, right now the port is 4010. But you can set it to 443 so that it will not blocked by firewalls! Yesssss!
