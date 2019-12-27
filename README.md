@@ -24,4 +24,4 @@ If you get errors trying to run the Server jar, that is because you have a diffe
 
 Pardon my ugly .DS_Stores. They do absolutly *NOTHING*.
 
-The cool thing is that you can set the port to 443 so that it will not blocked by firewalls! Yesssss!
+The cool thing is that, right now the port is 4010. But you can set it to 443 so that it will not blocked by firewalls! Yesssss!
