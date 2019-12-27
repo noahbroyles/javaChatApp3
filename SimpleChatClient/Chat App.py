@@ -1,4 +1,6 @@
 import os, sys, time, getpass, RUNFIRST
+import readline
+
 print()
 
 windys = RUNFIRST.Validate.isWindows()
