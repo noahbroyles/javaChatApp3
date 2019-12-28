@@ -3,7 +3,7 @@ import readline
 
 print()
 
-windys = RUNFIRST.Validate.isWindows()
+windows = RUNFIRST.Validate.isWindows()
 
 # isVaild(ip) is not used in this program, but is still USEFUL
 def isValidIp(ip):
@@ -43,7 +43,7 @@ try:
     server = input()
     if server[0] == '1':
         print('Okay. You are the host. To see what people are sending, run: \'cd classes; java SimpleChatClient 127.0.0.1 username\'')
-        if windys:
+        if windows:
             os.system("cd classes/ && java VerySimpleChatServer")
         else:
             os.system("cd classes/;java VerySimpleChatServer")
@@ -52,7 +52,7 @@ try:
         userName = getUsername()
         print()
         print('Connecting to the chat server @',ip,'using', userName,'as the User Name. Please Wait...')
-        if windys:
+        if windows:
             os.system("cd classes/ && java SimpleChatClient " + ip + " "+ userName)
         else:
             os.system("cd classes/;java SimpleChatClient " + ip + " "+ userName)
