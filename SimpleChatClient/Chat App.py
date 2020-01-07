@@ -39,7 +39,7 @@ def getUsername():
 
 try:
     os.system("clear")
-    print("Would you like to:\n[1] Host the Chat Server on your computer\n[2] or connect to the Chat Server server on a different computer? ", end=' ')
+    print("Would you like to:\n[1] Connect to the Chat Server server on a different computer\n[1] or host the Chat Server on your computer?", end=' ')
     server = input()
     if server[0] == '1':
         print('Okay. You are the host. To see what people are sending, run: \'cd classes; java SimpleChatClient 127.0.0.1 username\'')
