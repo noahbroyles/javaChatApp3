@@ -15,7 +15,7 @@ First run this fat juicy command (Linux or Mac):
 `cd source; javac -d ../classes/. *.java; cd ../classes; jar -cvmf manifest.txt SimpleChatClient.jar *`
 
 (Windows (junk)):
-`cd source && javac -d ../classes/. *.java && cd ../classes && jar -cvmf manifest.txt SimpleChatClient.jar *`
+`cd source && javac -encoding utf8 -d ../classes/. *.java && cd ../classes && jar -cvmf manifest.txt SimpleChatClient.jar *`
 
 This will recomile everything and get your version of java ready for binness.
 Start a server by typing `cd classes` and then `java -jar Server.jar`. Then to run the client open a new terminal / command prompt window, make sure you are in the `classes` folder, and type `java SimpleChatClient <IP address of server> <username>`. 
@@ -27,3 +27,5 @@ Pardon my ugly .DS_Stores. (_If you see any_) They do absolutly *NOTHING*.
 The cool thing is that, right now the port is 4010. But you can set it to 443 so that it will not blocked by firewalls! Yesssss!
 
 I've just noticed that on Windows the source code will not compile after adding emojis. I get a `unmappable character for encoding Cp1252` error when trying to compile. I will have to fix that in a later version.
+EDIT:
+After reading [this Stackoverflow post](https://stackoverflow.com/questions/9811382/compiling-javac-a-utf8-encoded-java-source-code-with-a-bom) I realized I should just compile using `javac -encoding utf8` instead of plain old `javac`.
