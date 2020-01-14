@@ -25,3 +25,5 @@ If you get errors trying to run the Server jar, that is because you have a diffe
 Pardon my ugly .DS_Stores. (_If you see any_) They do absolutly *NOTHING*.
 
 The cool thing is that, right now the port is 4010. But you can set it to 443 so that it will not blocked by firewalls! Yesssss!
+
+I've just noticed that on Windows the source code will not compile after adding emojis. I get a `unmappable character for encoding Cp1252` error when trying to compile. I will have to fix that in a later version.
