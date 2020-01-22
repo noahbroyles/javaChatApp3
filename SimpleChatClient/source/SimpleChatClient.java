@@ -174,8 +174,8 @@ public class SimpleChatClient {
         frame.getContentPane().add(BorderLayout.CENTER, mainpanel);
         emojiFrame.getContentPane().add(emojiTextArea);
 
-        // I'd like the window to be more dynamc based on OS, but for now I'm not too worried. 
-        frame.setSize(780,680);
+        // I'd like the window to be more dynamic based on OS, but for now I'm not too worried. 
+        frame.setSize(750,680);
         emojiFrame.setSize(380, 270);
         frame.setVisible(true);
         outgoing.requestFocus();

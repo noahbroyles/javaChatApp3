@@ -58,8 +58,8 @@ try:
             os.system("cd classes/;java VerySimpleChatServer "  + portNumber)
     elif server[0] == '1':
         ip = getIp()
-        userName = getUsername()
         portNumber = str(getPort())
+        userName = getUsername()
         print()
         print('Connecting to the chat server @ ' + ip + ":"+ portNumber,'using', userName,'as the User Name. Please Wait...')
         if windows:
