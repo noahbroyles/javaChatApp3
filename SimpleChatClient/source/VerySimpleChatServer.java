@@ -4,7 +4,24 @@ import java.util.*;
 
 public class VerySimpleChatServer {
 
+	static int port;
+
 	public static void main (String[] args) {
+		try {
+			port = Integer.parseInt(args[0]);
+
+		// There were no args, so ask in the console	
+		} catch (Exception ex) {
+			Scanner kbdReader = new Scanner(System.in);
+			boolean good = false;
+			while (!good) {
+				System.out.println("Enter the Chat-code/port number of the server. Must be greater than 4000: ");
+				port = kbdReader.nextInt();
+				if (port > 4000) {
+					good = true;
+				}
+			}
+		}
         System.out.println("The Chat Server is now running! Connections will show up below.\n");
         new VerySimpleChatServer().go();  
 	}
@@ -45,7 +62,7 @@ public class VerySimpleChatServer {
     public void go() {
         clientOutputStreams = new ArrayList<PrintWriter>();
         try {
-			ServerSocket serverSock = new ServerSocket(4010);
+			ServerSocket serverSock = new ServerSocket(port);
 			Runtime.getRuntime().addShutdownHook(new Thread() {@Override public void run() {try {serverSock.close();} catch (Exception x) {System.out.println("It didn't happen");}}});
 			while (true) {
 				Socket clientSocket = serverSock.accept();

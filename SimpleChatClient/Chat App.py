@@ -47,15 +47,16 @@ def getUsername():
 
 try:
     os.system("clear")
-    print("Would you like to:\n[1] Connect to the Chat Server server on a different computer\n[1] or host the Chat Server on your computer?", end=' ')
+    print("Would you like to:\n[1] Connect to the Chat Server server on a different computer\n[2] or host the Chat Server on your computer?", end=' ')
     server = input()
-    if server[0] == '1':
-        print('Okay. You are the host. To see what people are sending, run: \'cd classes; java SimpleChatClient 127.0.0.1 username\'')
+    if server[0] == '2':
+        portNumber = str(getPort())
+        print('Okay. You are the host. To see what people are sending, run: \'cd classes; java SimpleChatClient 127.0.0.1 username ' + portNumber+'\'')
         if windows:
-            os.system("cd classes/ && java VerySimpleChatServer")
+            os.system("cd classes/ && java VerySimpleChatServer " + portNumber)
         else:
-            os.system("cd classes/;java VerySimpleChatServer")
-    elif server[0] == '2':
+            os.system("cd classes/;java VerySimpleChatServer "  + portNumber)
+    elif server[0] == '1':
         ip = getIp()
         userName = getUsername()
         portNumber = str(getPort())
