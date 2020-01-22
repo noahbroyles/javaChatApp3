@@ -1,6 +1,4 @@
 .DS_Store
-SimpleChatClient/classes/SimpleChatClient.jar
-SimpleChatClient/classes/SimpleChatClient$EmojiButtonClicker.class
-SimpleChatClient/classes/SimpleChatClient$EmojiButtonClicker.class
-SimpleChatClient/classes/SimpleChatClient$SoundButtonListener.class
-SimpleChatClient/classes/SimpleChatClient$IncomingReader.class
+SimpleChatClient/classes
+*/.DS_Store
+*/*/.DS_Store
