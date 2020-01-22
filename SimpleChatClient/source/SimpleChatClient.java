@@ -26,6 +26,7 @@ public class SimpleChatClient {
     PrintWriter writer;
     Socket sock;
     String userName;
+    int portNumber;
     ArrayList<String> emojis = new ArrayList<String>(Arrays.asList("(~_^)", "﴾͡๏̯͡๏﴿", "◔ ⌣ ◔", "♥‿♥","(˃̣̣̥ w ˂̣̣̥)", "(ᵔᴥᵔ)", "¯\\_(ツ)_/¯","(✖╭╮✖)", "⌐╦╦═─", "༼ つ ◕_◕ ༽つ", "˙ ͜ʟ˙", "¬_¬", "[̲̅$̲̅(̲̅5̲̅)̲̅$̲̅]", "ू(･ิ ॄ･ิू๑)", "( ︶︿︶)_╭∩╮", "✄ it"));
 
     public static void main(String[] args) {
@@ -35,6 +36,7 @@ public class SimpleChatClient {
         try {
             String ip = args[0];
             client.userName = args[1];
+            client.portNumber = Integer.parseInt(args[2]);
             client.go(ip);
         } catch(Exception ex) {
             Scanner kbdReader = new Scanner(System.in);
@@ -184,7 +186,7 @@ public class SimpleChatClient {
     private void setUpNetworking(String ip) {
         
         try {
-            sock = new Socket(ip, 4010);
+            sock = new Socket(ip, portNumber);
             InputStreamReader streamReader = new InputStreamReader(sock.getInputStream());
             reader = new BufferedReader(streamReader);
             writer = new PrintWriter(sock.getOutputStream());

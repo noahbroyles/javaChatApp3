@@ -16,6 +16,14 @@ def isValidIp(ip):
     else:
         return True
 
+def getPort():
+    port = int(input("Enter the Chat-code/port number for the server: "))
+    while port < 4000:
+        port = int(input("Try again. The port number must be greater than 4000: "))
+    return port
+
+
+
 def getIp():
     print('The computer will now ask for the internet address of the chat server. This can be a DNS, IP Address, or hostname. It can either be local or over the internet. Push enter at the prompt if the chat server is being hosted on this computer.')
     # time.sleep(3)
@@ -50,11 +58,12 @@ try:
     elif server[0] == '2':
         ip = getIp()
         userName = getUsername()
+        portNumber = str(getPort())
         print()
-        print('Connecting to the chat server @',ip,'using', userName,'as the User Name. Please Wait...')
+        print('Connecting to the chat server @ ' + ip + ":"+ portNumber,'using', userName,'as the User Name. Please Wait...')
         if windows:
-            os.system("cd classes/ && java SimpleChatClient " + ip + " "+ userName)
+            os.system("cd classes/ && java SimpleChatClient " + ip + " "+ userName + " " + portNumber)
         else:
-            os.system("cd classes/;java SimpleChatClient " + ip + " "+ userName)
+            os.system("cd classes/;java SimpleChatClient " + ip + " "+ userName  + " " + portNumber)
 except KeyboardInterrupt:
     sys.exit("\n")
