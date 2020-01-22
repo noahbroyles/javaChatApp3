@@ -101,7 +101,7 @@ public class SimpleChatClient {
         JFrame frame = new JFrame("Freaky Chat App | " + userName + " chattin'");
         emojiFrame = new JFrame("Copy and Paste Emojis!");
         emojiFrame.setResizable(true);
-        frame.setResizable(false);
+        frame.setResizable(true);
 
         JPanel mainpanel = new JPanel();
 
@@ -160,7 +160,9 @@ public class SimpleChatClient {
 
         frame.getContentPane().add(BorderLayout.CENTER, mainpanel);
         emojiFrame.getContentPane().add(emojiTextArea);
-        frame.setSize(750,680);
+
+        // I'd like the window to be more dynamc based on OS, but for now I'm not too worried. 
+        frame.setSize(780,680);
         emojiFrame.setSize(380, 270);
         frame.setVisible(true);
         outgoing.requestFocus();
@@ -258,5 +260,3 @@ public class SimpleChatClient {
     }
 
 } //close whole thing
-
-
