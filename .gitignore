@@ -2,3 +2,4 @@
 SimpleChatClient/classes
 */.DS_Store
 */*/.DS_Store
+SimpleChatClient/__pycache__
