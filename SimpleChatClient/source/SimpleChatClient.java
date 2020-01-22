@@ -41,12 +41,24 @@ public class SimpleChatClient {
         } catch(Exception ex) {
             Scanner kbdReader = new Scanner(System.in);
             System.out.println();
-            System.out.println("Enter the IP of the host Server: ");
+            System.out.println("Enter the internet address of the host Server: ");
             String ip = kbdReader.next();
             System.out.println();
+
+            System.out.println("Enter the Chat-code/port number for the server(Greater than 4000): ");
+            client.portNumber = kbdReader.nextInt();
+            while (client.portNumber < 4000) {
+                System.out.println("Sorry bro, I said the port had to be greater than 4000. Try again: ");
+                client.portNumber = kbdReader.nextInt();
+            }
+
+            System.out.println();
             System.out.println("Enter your username, no spaces allowed: ");
+
             Boolean you = true;
             Boolean spaces = true;
+
+            // Validate all the info
             while (spaces || you) {
                 client.userName = kbdReader.next();
                 if (!client.userName.toLowerCase().equals("you")) {
@@ -54,6 +66,7 @@ public class SimpleChatClient {
                 } else {
                     System.out.println("Sorry Brotha, your username can't be \"You\". Try again: ");
                 }
+
                 if (!client.userName.contains(" ")) {
                     spaces = false;
                 } else {
