@@ -26,6 +26,7 @@ Pardon my ugly .DS_Stores. (_If you see any_) They do absolutly *NOTHING*.
 
 The cool thing is that, the port number can be picked by you! When you go to start a server, it will ask which port you want to serve on! This means you can host many different chat rooms from on server using port numbers as pins/identifiers.
 
-I've just noticed that on Windows the source code will not compile after adding emojis. I get a `unmappable character for encoding Cp1252` error when trying to compile. I will have to fix that in a later version.
-EDIT:
+I've just noticed that on Windows the source code will not compile after adding emojis. I get a `unmappable character for encoding Cp1252` error when trying to compile. I will have to fix that in a later version.  
+
+*EDIT:*
 After reading [this Stackoverflow post](https://stackoverflow.com/questions/9811382/compiling-javac-a-utf8-encoded-java-source-code-with-a-bom) I realized I should just compile using `javac -encoding utf8` instead of plain old `javac`.
